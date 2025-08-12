@@ -93,7 +93,7 @@ async def retrieve(
 
     Args:
         state (State): The current state containing queries and the retriever.
-        config (RunnableConfig | None, optional): Configuration for the retrieval process.
+        runtime (Runtime[Configuration]): Runtime context containing configuration.
 
     Returns:
         dict[str, list[Document]]: A dictionary with a single key "retrieved_docs"
@@ -151,6 +151,7 @@ graph = builder.compile(
     interrupt_after=[],
 )
 graph.name = "RetrievalGraph"
+
 
 
 
