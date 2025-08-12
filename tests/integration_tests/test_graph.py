@@ -27,15 +27,14 @@ async def test_retrieval_graph() -> None:
 
     res = await graph.ainvoke(
         {"messages": [("user", "Where do cats perform synchronized swimming routes?")]},
-        {
-            "configurable": {
-                "user_id": other_user_id,
-                "retriever_provider": "elastic-local",
-            }
+        context={
+            "user_id": other_user_id,
+            "retriever_provider": "elastic-local",
         },
     )
     response = str(res["messages"][-1].content)
     expect(response.lower()).against(lambda x: "bowl" not in x)
+
 
 
 
