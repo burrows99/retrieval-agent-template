@@ -41,7 +41,7 @@ async def generate_query(
 
     Args:
         state (State): The current state containing messages and other information.
-        config (RunnableConfig | None, optional): Configuration for the query generation process.
+        runtime (Runtime[Configuration]): Runtime context containing configuration.
 
     Returns:
         dict[str, list[str]]: A dictionary with a 'queries' key containing a list of generated queries.
@@ -152,5 +152,6 @@ graph = builder.compile(
     interrupt_after=[],
 )
 graph.name = "RetrievalGraph"
+
 
 
