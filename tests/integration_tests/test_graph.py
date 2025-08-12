@@ -34,7 +34,3 @@ async def test_retrieval_graph() -> None:
     )
     response = str(res["messages"][-1].content)
     expect(response.lower()).against(lambda x: "bowl" not in x)
-
-
-
-

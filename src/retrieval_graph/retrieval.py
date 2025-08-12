@@ -131,5 +131,3 @@ def make_retriever() -> Generator[VectorStoreRetriever, None, None]:
                 f"Expected one of: {', '.join(Configuration.__annotations__['retriever_provider'].__args__)}\n"
                 f"Got: {configuration.retriever_provider}"
             )
-
-
