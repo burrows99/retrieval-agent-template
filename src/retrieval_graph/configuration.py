@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field, fields
-from typing import Annotated, Any, Literal, Optional, Type, TypeVar
-
-from langchain_core.runnables import RunnableConfig, ensure_config
+import os
+from dataclasses import dataclass, field
+from typing import Annotated, Any, Literal
 
 from retrieval_graph import prompts
 
@@ -99,3 +98,4 @@ class Configuration(IndexConfiguration):
             "description": "The language model used for processing and refining queries. Should be in the form: provider/model-name."
         },
     )
+
