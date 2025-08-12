@@ -32,7 +32,7 @@ def ensure_docs_have_user_id(
 
 
 async def index_docs(
-    state: IndexState, *, config: Optional[RunnableConfig] = None
+    state: IndexState, *, runtime: Runtime[IndexConfiguration]
 ) -> dict[str, str]:
     """Asynchronously index documents in the given state using the configured retriever.
 
@@ -42,12 +42,10 @@ async def index_docs(
 
     Args:
         state (IndexState): The current state containing documents and retriever.
-        config (Optional[RunnableConfig]): Configuration for the indexing process.r
+        runtime (Runtime[IndexConfiguration]): Runtime context containing configuration.
     """
-    if not config:
-        raise ValueError("Configuration required to run index_docs.")
-    with retrieval.make_retriever(config) as retriever:
-        stamped_docs = ensure_docs_have_user_id(state.docs, config)
+    with retrieval.make_retriever(runtime) as retriever:
+        stamped_docs = ensure_docs_have_user_id(state.docs, runtime)
 
         await retriever.aadd_documents(stamped_docs)
     return {"docs": "delete"}
@@ -63,5 +61,6 @@ builder.add_edge("__start__", "index_docs")
 # This compiles it into a graph you can invoke and deploy.
 graph = builder.compile()
 graph.name = "IndexGraph"
+
 
 
