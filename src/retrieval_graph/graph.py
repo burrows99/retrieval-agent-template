@@ -124,10 +124,9 @@ async def respond(
             "messages": state.messages,
             "retrieved_docs": retrieved_docs,
             "system_time": datetime.now(tz=timezone.utc).isoformat(),
-        },
-        config,
+        }
     )
-    response = await model.ainvoke(message_value, config)
+    response = await model.ainvoke(message_value)
     # We return a list, because this will get added to the existing list
     return {"messages": [response]}
 
@@ -151,6 +150,7 @@ graph = builder.compile(
     interrupt_after=[],
 )
 graph.name = "RetrievalGraph"
+
 
 
 
