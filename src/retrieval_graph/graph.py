@@ -134,7 +134,7 @@ async def respond(
 # Define a new graph (It's just a pipe)
 
 
-builder = StateGraph(State, input=InputState, config_schema=Configuration)
+builder = StateGraph(State, input=InputState, context_schema=Configuration)
 
 builder.add_node(generate_query)
 builder.add_node(retrieve)
@@ -150,6 +150,7 @@ graph = builder.compile(
     interrupt_after=[],
 )
 graph.name = "RetrievalGraph"
+
 
 
 
