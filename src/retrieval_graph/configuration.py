@@ -90,4 +90,17 @@ class Configuration(IndexConfiguration):
         },
     )
 
+    def __post_init__(self) -> None:
+        """Populate fields from environment variables if not already set."""
+        # Call parent's __post_init__ first
+        super().__post_init__()
+        
+        # Only populate from environment variables if the field is using the default value
+        if self.response_model == "anthropic/claude-3-5-sonnet-20240620":
+            self.response_model = os.environ.get("RESPONSE_MODEL", "anthropic/claude-3-5-sonnet-20240620")
+        
+        if self.query_model == "anthropic/claude-3-haiku-20240307":
+            self.query_model = os.environ.get("QUERY_MODEL", "anthropic/claude-3-haiku-20240307")
+
+
 
