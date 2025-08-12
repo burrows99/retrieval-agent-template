@@ -1,10 +1,10 @@
 """This "graph" simply exposes an endpoint for a user to upload docs to be indexed."""
 
-from typing import Optional, Sequence
+from typing import Sequence
 
 from langchain_core.documents import Document
-from langchain_core.runnables import RunnableConfig
 from langgraph.graph import StateGraph
+from langgraph.runtime import Runtime
 
 from retrieval_graph import retrieval
 from retrieval_graph.configuration import IndexConfiguration
@@ -63,3 +63,4 @@ builder.add_edge("__start__", "index_docs")
 # This compiles it into a graph you can invoke and deploy.
 graph = builder.compile()
 graph.name = "IndexGraph"
+
