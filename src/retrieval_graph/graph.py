@@ -99,8 +99,8 @@ async def retrieve(
         dict[str, list[Document]]: A dictionary with a single key "retrieved_docs"
         containing a list of retrieved Document objects.
     """
-    with retrieval.make_retriever(config) as retriever:
-        response = await retriever.ainvoke(state.queries[-1], config)
+    with retrieval.make_retriever(runtime) as retriever:
+        response = await retriever.ainvoke(state.queries[-1])
         return {"retrieved_docs": response}
 
 
@@ -151,6 +151,7 @@ graph = builder.compile(
     interrupt_after=[],
 )
 graph.name = "RetrievalGraph"
+
 
 
 
