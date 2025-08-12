@@ -243,7 +243,7 @@ End setup instructions
 
 ## Using
 
-Once you've set up your retriever saved your model secrets, it's time to try it out! First, let's add some information to the index. Open studio, select the "indexer" graph from the dropdown in the top-left, provide an example user ID in the configuration at the bottom, and then add some content to chat over.
+Once you've set up your retriever saved your model secrets, it's time to try it out! First, let's add some information to the index. Open studio, select the "indexer" graph from the dropdown in the top-left, provide an example user ID in the context configuration at the bottom, and then add some content to chat over.
 
 ```json
 [{ "page_content": "My cat knows python." }]
