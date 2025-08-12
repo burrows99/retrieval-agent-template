@@ -12,17 +12,17 @@ from retrieval_graph.state import IndexState
 
 
 def ensure_docs_have_user_id(
-    docs: Sequence[Document], config: RunnableConfig
+    docs: Sequence[Document], runtime: Runtime[IndexConfiguration]
 ) -> list[Document]:
     """Ensure that all documents have a user_id in their metadata.
 
         docs (Sequence[Document]): A sequence of Document objects to process.
-        config (RunnableConfig): A configuration object containing the user_id.
+        runtime (Runtime[IndexConfiguration]): Runtime context containing configuration.
 
     Returns:
         list[Document]: A new list of Document objects with updated metadata.
     """
-    user_id = config["configurable"]["user_id"]
+    user_id = runtime.context.user_id
     return [
         Document(
             page_content=doc.page_content, metadata={**doc.metadata, "user_id": user_id}
@@ -63,4 +63,5 @@ builder.add_edge("__start__", "index_docs")
 # This compiles it into a graph you can invoke and deploy.
 graph = builder.compile()
 graph.name = "IndexGraph"
+
 
