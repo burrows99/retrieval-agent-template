@@ -57,7 +57,7 @@ async def generate_query(
         human_input = get_message_text(messages[-1])
         return {"queries": [human_input]}
     else:
-        configuration = Configuration.from_runnable_config(config)
+        configuration = runtime.context
         # Feel free to customize the prompt, model, and other logic!
         prompt = ChatPromptTemplate.from_messages(
             [
@@ -152,6 +152,7 @@ graph = builder.compile(
     interrupt_after=[],
 )
 graph.name = "RetrievalGraph"
+
 
 
 
