@@ -74,10 +74,9 @@ async def generate_query(
                 "messages": state.messages,
                 "queries": "\n- ".join(state.queries),
                 "system_time": datetime.now(tz=timezone.utc).isoformat(),
-            },
-            config,
+            }
         )
-        generated = cast(SearchQuery, await model.ainvoke(message_value, config))
+        generated = cast(SearchQuery, await model.ainvoke(message_value))
         return {
             "queries": [generated.query],
         }
@@ -152,6 +151,7 @@ graph = builder.compile(
     interrupt_after=[],
 )
 graph.name = "RetrievalGraph"
+
 
 
 
