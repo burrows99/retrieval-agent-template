@@ -31,7 +31,7 @@ class SearchQuery(BaseModel):
 
 
 async def generate_query(
-    state: State, *, config: RunnableConfig
+    state: State, *, runtime: Runtime[Configuration]
 ) -> dict[str, list[str]]:
     """Generate a search query based on the current state and configuration.
 
@@ -152,4 +152,5 @@ graph = builder.compile(
     interrupt_after=[],
 )
 graph.name = "RetrievalGraph"
+
 
