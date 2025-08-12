@@ -83,7 +83,7 @@ async def generate_query(
 
 
 async def retrieve(
-    state: State, *, config: RunnableConfig
+    state: State, *, runtime: Runtime[Configuration]
 ) -> dict[str, list[Document]]:
     """Retrieve documents based on the latest query in the state.
 
@@ -151,6 +151,7 @@ graph = builder.compile(
     interrupt_after=[],
 )
 graph.name = "RetrievalGraph"
+
 
 
 
