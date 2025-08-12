@@ -18,7 +18,7 @@ class IndexConfiguration:
     retriever provider choice, and search parameters.
     """
 
-    user_id: str = field(metadata={"description": "Unique identifier for the user."})
+    user_id: str = field(default="", metadata={"description": "Unique identifier for the user."})
 
     embedding_model: Annotated[
         str,
@@ -47,26 +47,17 @@ class IndexConfiguration:
         },
     )
 
-    @classmethod
-    def from_runnable_config(
-        cls: Type[T], config: Optional[RunnableConfig] = None
-    ) -> T:
-        """Create an IndexConfiguration instance from a RunnableConfig object.
-
-        Args:
-            cls (Type[T]): The class itself.
-            config (Optional[RunnableConfig]): The configuration object to use.
-
-        Returns:
-            T: An instance of IndexConfiguration with the specified configuration.
-        """
-        config = ensure_config(config)
-        configurable = config.get("configurable") or {}
-        _fields = {f.name for f in fields(cls) if f.init}
-        return cls(**{k: v for k, v in configurable.items() if k in _fields})
-
-
-T = TypeVar("T", bound=IndexConfiguration)
+    def __post_init__(self) -> None:
+        """Populate fields from environment variables if not already set."""
+        # Only populate from environment variables if the field is not already set
+        if not self.user_id:
+            self.user_id = os.environ.get("USER_ID", "")
+        
+        if self.embedding_model == "openai/text-embedding-3-small":
+            self.embedding_model = os.environ.get("EMBEDDING_MODEL", "openai/text-embedding-3-small")
+        
+        if self.retriever_provider == "elastic":
+            self.retriever_provider = os.environ.get("RETRIEVER_PROVIDER", "elastic")  # type: ignore
 
 
 @dataclass(kw_only=True)
@@ -98,4 +89,5 @@ class Configuration(IndexConfiguration):
             "description": "The language model used for processing and refining queries. Should be in the form: provider/model-name."
         },
     )
+
 
