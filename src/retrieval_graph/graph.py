@@ -108,7 +108,7 @@ async def respond(
     state: State, *, runtime: Runtime[Configuration]
 ) -> dict[str, list[BaseMessage]]:
     """Call the LLM powering our "agent"."""
-    configuration = Configuration.from_runnable_config(config)
+    configuration = runtime.context
     # Feel free to customize the prompt, model, and other logic!
     prompt = ChatPromptTemplate.from_messages(
         [
@@ -151,6 +151,7 @@ graph = builder.compile(
     interrupt_after=[],
 )
 graph.name = "RetrievalGraph"
+
 
 
 
