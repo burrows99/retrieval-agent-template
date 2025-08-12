@@ -13,8 +13,8 @@ from langchain_core.documents import Document
 from langchain_core.messages import BaseMessage
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.pydantic_v1 import BaseModel
-from langchain_core.runnables import RunnableConfig
 from langgraph.graph import StateGraph
+from langgraph.runtime import Runtime
 
 from retrieval_graph import retrieval
 from retrieval_graph.configuration import Configuration
@@ -152,3 +152,4 @@ graph = builder.compile(
     interrupt_after=[],
 )
 graph.name = "RetrievalGraph"
+
