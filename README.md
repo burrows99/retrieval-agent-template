@@ -196,8 +196,6 @@ To use OpenAI's chat models:
 OPENAI_API_KEY=your-api-key
 ```
 
-
-
 ### Setup Embedding Model
 
 The defaults values for `embedding_model` are shown below:
@@ -228,14 +226,6 @@ To use Cohere's embeddings:
 ```bash
 COHERE_API_KEY=your-api-key
 ```
-
-
-
-
-
-<!--
-End setup instructions
--->
 
 ## Using
 
