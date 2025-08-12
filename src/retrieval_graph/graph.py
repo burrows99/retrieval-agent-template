@@ -105,7 +105,7 @@ async def retrieve(
 
 
 async def respond(
-    state: State, *, config: RunnableConfig
+    state: State, *, runtime: Runtime[Configuration]
 ) -> dict[str, list[BaseMessage]]:
     """Call the LLM powering our "agent"."""
     configuration = Configuration.from_runnable_config(config)
@@ -151,6 +151,7 @@ graph = builder.compile(
     interrupt_after=[],
 )
 graph.name = "RetrievalGraph"
+
 
 
 
