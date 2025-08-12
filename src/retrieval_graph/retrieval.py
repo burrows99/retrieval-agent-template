@@ -11,8 +11,8 @@ from contextlib import contextmanager
 from typing import Generator
 
 from langchain_core.embeddings import Embeddings
-from langchain_core.runnables import RunnableConfig
 from langchain_core.vectorstores import VectorStoreRetriever
+from langgraph.runtime import get_runtime
 
 from retrieval_graph.configuration import Configuration, IndexConfiguration
 
@@ -133,3 +133,4 @@ def make_retriever(
                 f"Expected one of: {', '.join(Configuration.__annotations__['retriever_provider'].__args__)}\n"
                 f"Got: {configuration.retriever_provider}"
             )
+
